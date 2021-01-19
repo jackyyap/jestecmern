@@ -6,11 +6,11 @@ const Users = require("../models/usersModel.js");
 
 router.post("/register", async (req, res) => {
     try {
-        let { email, password, passwordCheck, displayName } = req.body;
+        let { email, password, passwordCheck, firstName, lastName, affiliation, title } = req.body;
 
         // validate
 
-        if (!email || !password || !passwordCheck)
+        if (!email || !password || !passwordCheck || !firstName || !lastName || !affiliation || !title)
             return res
                 .status(400)
                 .json({ msg: "Not all fields have been entered" });
@@ -31,7 +31,7 @@ router.post("/register", async (req, res) => {
                 .status(400)
                 .json({ msg: "Account already exists" });
 
-        if (!displayName) displayName = email;
+
 
         // password encryption
 
@@ -41,7 +41,10 @@ router.post("/register", async (req, res) => {
         const newUser = new Users({
             email,
             password: passwordHash,
-            displayName,
+            firstName,
+            lastName,
+            affiliation,
+            title,
         });
 
         const savedUser = await newUser.save();
@@ -81,8 +84,7 @@ router.post("/login", async (req, res) => {
             token,
             user: {
                 id: user._id,
-                displayName: user.displayName,
-                email: user.email,
+                firstName: user.firstName,
             },
         });
         console.log(token)
@@ -128,7 +130,7 @@ router.post("/tokenIsValid", async (req, res) => {
 router.get("/", auth, async (req, res) => {
     const user = await Users.findById(req.user);
     res.json({
-        displayName: user.displayName,
+        firstName: user.firstName,
         id: user._id,
     });
 });
