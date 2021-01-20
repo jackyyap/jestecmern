@@ -21,13 +21,19 @@ export default function AuthOptions() {
     return (
         <nav className="auth-options"> {
             userData.user ? (
-                <button onClick={logout}>Logout</button>
+                <a className="btn btn-link" onClick={logout}>Logout</a>
             ) : (
                     <>
-                        <button onClick={register}>Register</button>
-                        <button onClick={login}>Login</button>
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="btn btn-link text-light auth-options" onClick={register}>Register</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="btn btn-link text-light auth-options" onClick={login}>Login</a>
+                        </li>
+                    </ul>
                     </>
-                )};
+                )}
         </nav>
     );
 };

@@ -1,0 +1,45 @@
+select {
+  margin-bottom: .5rem;
+}
+
+.row {
+  margin-bottom: .5rem;
+}
+
+.bg-header {
+  background-image: url(https://mixkit.imgix.net/art/preview/mixkit-exhausted-man-in-front-of-a-computer-with-his-head-69-original-large.png?q=80&auto=format%2Ccompress&h=700&q=80&dpr=1);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  opacity: 0.8;
+  background-blend-mode: overlay;
+}
+
+svg {
+	margin-right: 0.5rem;
+}
+
+.row .row {
+  margin-top: 1rem;
+  margin-bottom: 0;
+}
+
+[class*="col-"] {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+
+.details {
+  opacity: 0.8;
+}
+
+.details:hover {
+  opacity: 1; 
+}
+
+.chatbox {
+  position: fixed;
+  bottom: 0;
+  right: 2rem;
+}
