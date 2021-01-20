@@ -85,6 +85,7 @@ router.post("/login", async (req, res) => {
             user: {
                 id: user._id,
                 firstName: user.firstName,
+                userRole: user.userRole,
             },
         });
         console.log(token)
@@ -132,6 +133,7 @@ router.get("/", auth, async (req, res) => {
     res.json({
         firstName: user.firstName,
         id: user._id,
+        userRole: user.userRole,
     });
 });
 
