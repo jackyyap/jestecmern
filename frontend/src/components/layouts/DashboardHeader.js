@@ -1,4 +1,4 @@
-function DashboardHeader() {
+function DashboardHeader(name, role) {
   return (
   	<div class="justify-content-between card bg-info text-center shadow">
 	  <div class="py-5">

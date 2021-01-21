@@ -79,3 +79,6 @@ input[type="submit"] {
   background-repeat: no-repeat;
 }
 
+#home .masthead {
+    overflow: hidden;
+}

@@ -85,13 +85,18 @@ export default function Register() {
                 <div class="form-row">
                     <div class="col-sm-2 form-label-group">
                       <label for="register-title">Title</label>
-                      <input 
+                      <select 
                         type="text"
                         id="register-title"
                         onChange={(e) => setFirstName(e.target.value)}
                         class="form-control"
                         placeholder="Title"
-                        required />
+                        required>
+                        <option value="Mr.">Mr.</option>
+                        <option value="Mrs.">Mrs.</option>
+                        <option value="Dr.">Dr.</option>
+                        <option value="Prof.">Prof.</option>
+                      </select>
                     </div>
                     <div class="col-sm-5 form-label-group">
                       <label for="register-firstName">First Name</label>
