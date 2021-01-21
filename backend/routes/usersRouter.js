@@ -23,7 +23,7 @@ router.post("/register", async (req, res) => {
         if (password !== passwordCheck)
             return res
                 .status(400)
-                .json({ msg: "Passwords entered does not match" });
+                .json({ msg: "The password confirmation does not match" });
 
         const existingUser = await Users.findOne({ email: email })
         if (existingUser)
@@ -85,6 +85,7 @@ router.post("/login", async (req, res) => {
             user: {
                 id: user._id,
                 firstName: user.firstName,
+                userRole: user.userRole,
             },
         });
         console.log(token)
@@ -132,6 +133,7 @@ router.get("/", auth, async (req, res) => {
     res.json({
         firstName: user.firstName,
         id: user._id,
+        userRole: user.userRole,
     });
 });
 
