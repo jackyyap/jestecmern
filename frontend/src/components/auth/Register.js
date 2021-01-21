@@ -88,7 +88,7 @@ export default function Register() {
                       <input 
                         type="text"
                         id="register-title"
-                        onChange={(e) => setFirstName(e.target.value)}
+                        onChange={(e) => setTitle(e.target.value)}
                         class="form-control"
                         placeholder="Title"
                         required />
@@ -108,7 +108,7 @@ export default function Register() {
                       <input 
                         type="text" 
                         id="register-lastName"
-                        onChange={(e) => setPassword(e.target.value)}
+                        onChange={(e) => setLastName(e.target.value)}
                         class="form-control"
                         placeholder="Last name"
                         required />
@@ -120,7 +120,7 @@ export default function Register() {
                   <input 
                     type="text" 
                     id="register-affiliation"
-                    onChange={(e) => setPassword(e.target.value)}
+                    onChange={(e) => setAffiliation(e.target.value)}
                     class="form-control"
                     placeholder="Password"
                     required
