@@ -5,6 +5,11 @@
     box-sizing: border-box;
 }
 
+body {
+    padding-top: 2rem;
+}
+
+
 a {
     color: rgb(0, 89, 255);
     text-decoration: unset;
@@ -22,29 +27,6 @@ input[type="submit"] {
     color: unset;
     cursor: pointer;
 }
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-p,
-ul,
-ol {
-    margin: 1em 0;
-}
-
-/* general */
-
-body {
-    font-family: "Roboto", sans-serif;
-}
-
-.page {
-    padding: 1rem;
-}
-
 
 /* header */
 
@@ -88,3 +70,12 @@ body {
         padding: 0 0.5rem;
     }
 }
+
+.masthead {
+  height: 100vh;
+  min-height: 500px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
