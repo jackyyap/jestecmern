@@ -79,3 +79,23 @@ input[type="submit"] {
   background-repeat: no-repeat;
 }
 
+/* error notice */
+
+.error-notice {
+    border: 1px solid rgba(197, 9, 9, 0.829);
+    margin: 1rem 0;
+    padding: 0.5rem;
+    border-radius: 8px;
+    color: red;
+    background-color: rgb(231, 212, 212);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.error-notice button {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: rgb(229, 194, 194);
+}

@@ -1,7 +1,16 @@
-import React from 'react'
+import React, { useEffect, useContext } from 'react';
+import {useHistory} from "react-router-dom";
+import UserContext from "../../context/UserContext";
 
 export default function Home() {
-    return (
+  const {userData} = useContext(UserContext);
+  const history = useHistory();
+
+  useEffect(() => {
+    if (!userData.user) history.push("/login");
+  })
+
+  return (
     <header class="masthead">
       <div class="container h-100">
         <div class="row h-100 align-items-center">
@@ -13,6 +22,6 @@ export default function Home() {
           </div>
         </div>
       </div>
-  	</header>
-    )
+    </header>
+  )
 }
