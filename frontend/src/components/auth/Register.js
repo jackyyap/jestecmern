@@ -67,7 +67,7 @@ export default function Register() {
                   onChange={(e) => setEmail(e.target.value)}
                   class="form-control"
                   placeholder="Email address"
-                  required />
+                />
               </div>
 
               <div class="form-row">
@@ -79,7 +79,7 @@ export default function Register() {
                     onChange={(e) => setPassword(e.target.value)}
                     class="form-control"
                     placeholder="Password"
-                    required />
+                  />
                 </div>
                 <div class="col-sm-6 form-label-group">
                   <label for="register-password">Confirm Password</label>
@@ -88,7 +88,7 @@ export default function Register() {
                     onChange={(e) => setPasswordCheck(e.target.value)}
                     class="form-control"
                     placeholder="Confirm password"
-                    required />
+                  />
                 </div>
               </div>
 
@@ -116,7 +116,7 @@ export default function Register() {
                     onChange={(e) => setFirstName(e.target.value)}
                     class="form-control"
                     placeholder="First name"
-                    required />
+                  />
                 </div>
                 <div class="col-sm-5 form-label-group">
                   <label for="register-lastName">Last Name</label>
@@ -126,7 +126,7 @@ export default function Register() {
                     onChange={(e) => setLastName(e.target.value)}
                     class="form-control"
                     placeholder="Last name"
-                    required />
+                  />
                 </div>
               </div>
 
@@ -138,7 +138,7 @@ export default function Register() {
                   onChange={(e) => setAffiliation(e.target.value)}
                   class="form-control"
                   placeholder="Affiliation"
-                  required
+
                   autofocus />
               </div>
 
