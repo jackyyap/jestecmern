@@ -1,5 +1,6 @@
 import ManuscriptList from './ManuscriptList';
 import DashboardHeader from '../layouts/DashboardHeader';
+import AuthorModal from './AuthorModal';
 
 function Author (){
 	return(
@@ -18,6 +19,8 @@ function Author (){
           </div>
       </div>
   	</header>
+
+    <AuthorModal />
   	</>
   	);
 }
