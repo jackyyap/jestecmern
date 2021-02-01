@@ -9,6 +9,7 @@ import Register from './components/auth/Register';
 import UserContext from "./context/UserContext";
 
 import "./style.css";
+import Submission from './components/layouts/Submission';
 
 
 export default function App() {
@@ -57,6 +58,7 @@ export default function App() {
                     <Route path="/dashboard" component={Dashboard} />
                     <Route path="/login" component={Login} />
                     <Route path="/register" component={Register} />
+                    <Route path="/submission" component={Submission} />
                 </Switch>
             </UserContext.Provider>
         </BrowserRouter>
