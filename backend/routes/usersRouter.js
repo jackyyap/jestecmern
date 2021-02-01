@@ -6,11 +6,11 @@ const Users = require("../models/usersModel.js");
 
 router.post("/register", async (req, res) => {
     try {
-        let { email, password, passwordCheck, firstName, lastName, affiliation, title } = req.body;
+        let { email, password, passwordCheck, firstName, lastName, affiliation, title, orcidId } = req.body;
 
         // validate
 
-        if (!email || !password || !passwordCheck || !firstName || !lastName || !affiliation || !title)
+        if (!email || !password || !passwordCheck || !firstName || !lastName || !affiliation || !title || !orcidId)
             return res
                 .status(400)
                 .json({ msg: "Not all fields have been entered" });
