@@ -130,7 +130,8 @@ export default function Register() {
                 </div>
               </div>
 
-              <div class="form-label-group mb-3">
+            <div class="form-row">
+              <div class="col-sm-6 form-label-group mb-3">
                 <label for="register-affiliation">Affiliation</label>
                 <input
                   type="text"
@@ -141,6 +142,19 @@ export default function Register() {
 
                   autofocus />
               </div>
+              <div class="col-sm-6">
+                <label for="register-orcid">ORCID ID</label>
+                <input
+                  type="text"
+                  id="register-orcid"
+                  //onChange={(e) => setAffiliation(e.target.value)}
+                  class="form-control"
+                  placeholder="https://orcid.org/0000-0000-0000-0000"
+                  
+                  autofocus />
+                <small class="text-muted">Please provide full ORCID link</small>
+              </div>
+            </div>
 
               <div class="custom-control custom-checkbox mb-3">
                 <input type="checkbox" class="custom-control-input" id="customCheck1" />

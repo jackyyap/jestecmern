@@ -49,12 +49,12 @@ export default function Login() {
               <form className="form" onSubmit={submit}>
                 <div class="form-label-group mb-2">
                   <label htmlFor="login-email">Email Address</label>
-                  <input type="email" id="login-email" name="uid" class="form-control" placeholder="Email address" required autofocus onChange={(e) => setEmail(e.target.value)} />
+                  <input type="email" id="login-email" name="uid" class="form-control" placeholder="Email address" autofocus onChange={(e) => setEmail(e.target.value)} />
                 </div>
 
                 <div class="form-label-group mb-2">
                   <label htmlFor="login-password">Password</label>
-                  <input type="password" id="login-password" name="pwd" class="form-control" placeholder="Password" required onChange={(e) => setPassword(e.target.value)} />
+                  <input type="password" id="login-password" name="pwd" class="form-control" placeholder="Password" onChange={(e) => setPassword(e.target.value)} />
                 </div>
 
                 <div class="custom-control custom-checkbox mb-3">

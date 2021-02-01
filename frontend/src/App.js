@@ -4,6 +4,8 @@ import Axios from "axios";
 import Header from './components/layouts/Header';
 import Home from './components/pages/Home';
 import Dashboard from './components/pages/Dashboard';
+import Archive from './components/pages/Archive';
+import ArticleReader from './components/pages/ArticleReader';
 import Login from './components/auth/Login';
 import Register from './components/auth/Register';
 import UserContext from "./context/UserContext";
@@ -12,6 +14,7 @@ import "./style.css";
 
 
 export default function App() {
+
     const [userData, setUserData] = useState({
         token: undefined,
         user: undefined,
@@ -57,6 +60,8 @@ export default function App() {
                     <Route path="/dashboard" component={Dashboard} />
                     <Route path="/login" component={Login} />
                     <Route path="/register" component={Register} />
+                    <Route path="/archive" component={Archive} />
+                    <Route path="/articlereader" component={ArticleReader} />
                 </Switch>
             </UserContext.Provider>
         </BrowserRouter>
