@@ -11,6 +11,7 @@ import Register from './components/auth/Register';
 import UserContext from "./context/UserContext";
 
 import "./style.css";
+import Submission from './components/layouts/Submission';
 
 
 export default function App() {
@@ -62,6 +63,7 @@ export default function App() {
                     <Route path="/register" component={Register} />
                     <Route path="/archive" component={Archive} />
                     <Route path="/articlereader" component={ArticleReader} />
+                    <Route path="/submission" component={Submission} />
                 </Switch>
             </UserContext.Provider>
         </BrowserRouter>
