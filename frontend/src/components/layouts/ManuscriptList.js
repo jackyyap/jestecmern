@@ -1,26 +1,60 @@
 import Manuscript from '../classes/Manuscript';
+import React, { useState, useEffect } from 'react';
 
-function ManuscriptList() {
-  return (
-  	<>
-	  	<div class="row text-light">
-			<div class="col-sm-2">ID</div>
-			<div class="col-sm-5">Title</div>
-			<div class="col-sm-2">Date Submitted</div>
-			<div class="col-sm-2">Review By</div>
-			<div class="col-sm-1"></div>
+import axios from 'axios';
+import { API_URL } from '../../utils/constant';
+
+const ManuscriptList = () => {
+	const [filesList, setFilesList] = useState([]);
+	const [errorMsg, setErrorMsg] = useState('');
+	useEffect(() => {
+		const getFilesList = async () => {
+			try {
+				const { data } = await axios.get(`${API_URL}/getAllFiles`);
+				setErrorMsg('');
+				setFilesList(data);
+			} catch (error) {
+				error.response && setErrorMsg(error.response.data);
+			}
+		};
+		getFilesList();
+	}, []);
+
+
+	return (
+		<div className="files-container p-5 text-light">
+			<table className="files-table">
+				<thead>
+					<tr>
+						<th>Manuscript Title</th>
+						<th>Keywords</th>
+						<th>Track</th>
+						<th>Abstract</th>
+					</tr>
+				</thead>
+				<tbody>
+					{filesList.length > 0 ? (
+						filesList.map(
+							({ _id, manuscriptTitle, keywords, track, abstract, file_path, file_mimetype }) => (
+								<tr key={_id}>
+									<td className="manuscript-title">{manuscriptTitle}</td>
+									<td className="keywords">{keywords}</td>
+									<td className="track">{track}</td>
+									<td className="abstract">{abstract}</td>
+								</tr>
+							)
+						)
+					) : (
+							<tr>
+								<td colSpan={3} style={{ fontWeight: '300' }}>
+									No files found. Please add some.
+              </td>
+							</tr>
+						)}
+				</tbody>
+			</table>
 		</div>
-
-		<Manuscript manuid="2" title="asd" submit="21/1/2021" review="21/2/2021" />
-		<Manuscript manuid="2" title="asd" submit="21/1/2021" review="21/2/2021" />
-		<Manuscript manuid="2" title="asd" submit="21/1/2021" review="21/2/2021" />
-		<Manuscript manuid="2" title="asd" submit="21/1/2021" review="21/2/2021" />
-		<Manuscript manuid="2" title="asd" submit="21/1/2021" review="21/2/2021" />
-		<Manuscript manuid="2" title="asd" submit="21/1/2021" review="21/2/2021" />
-		<Manuscript manuid="2" title="asd" submit="21/1/2021" review="21/2/2021" />
-		<Manuscript manuid="2" title="asd" submit="21/1/2021" review="21/2/2021" />
-	</>
-  );
-}
+	);
+};
 
 export default ManuscriptList;
