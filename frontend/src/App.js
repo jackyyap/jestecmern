@@ -12,6 +12,7 @@ import UserContext from "./context/UserContext";
 
 import "./style.css";
 import Submission from './components/layouts/Submission';
+import Fileslist from './components/layouts/FilesList';
 
 
 export default function App() {
@@ -64,6 +65,7 @@ export default function App() {
                     <Route path="/archive" component={Archive} />
                     <Route path="/articlereader" component={ArticleReader} />
                     <Route path="/submission" component={Submission} />
+                    <Route path="/fileslist" component={Fileslist} />
                 </Switch>
             </UserContext.Provider>
         </BrowserRouter>

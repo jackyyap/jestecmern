@@ -32,6 +32,14 @@ const Submission = (props) => {
 
     };
 
+    const updateBorder = (dragState) => {
+        if (dragState === 'over') {
+          dropRef.current.style.border = '2px solid #000';
+        } else if (dragState === 'leave') {
+          dropRef.current.style.border = '2px dashed #e9ebeb';
+        }
+      };
+
     const handleOnSubmit = async (event) => {
         event.preventDefault();
         try {
@@ -50,6 +58,7 @@ const Submission = (props) => {
                             'Content-Type': 'multipart/form-data'
                         }
                     });
+                    props.history.push('/AuthorModal');
                 } else {
                     setErrorMsg('Please select a file to add.');
                 }
@@ -117,7 +126,9 @@ const Submission = (props) => {
                         </Col>
                     </Row>
                     <div className="upload-section">
-                        <Dropzone onDrop={onDrop}>
+                        <Dropzone onDrop={onDrop}
+                        onDragEnter={() => updateBorder('over')}
+                        onDragLeave={() => updateBorder('leave')}>
                             {({ getRootProps, getInputProps }) => (
                                 <div {...getRootProps({ className: 'drop-zone' })} ref={dropRef}>
                                     <input {...getInputProps()} />
@@ -133,7 +144,7 @@ const Submission = (props) => {
                     </div>
                     <Button variant="primary" type="submit">
                         Submit
-        </Button>
+                    </Button>
                 </Form>
             </div>
         </React.Fragment>
