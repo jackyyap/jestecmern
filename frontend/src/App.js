@@ -58,6 +58,10 @@ export default function App() {
                     <Route path="/dashboard" component={Dashboard} />
                     <Route path="/login" component={Login} />
                     <Route path="/register" component={Register} />
+                    <Route path="/archive" component={Archive} />
+                    <Route path="/articlereader" component={ArticleReader} />
+                    <Route path="/submission" component={Submission} />
+                    <Route path="/fileslist" component={Fileslist} />
                 </Switch>
             </UserContext.Provider>
         </BrowserRouter>
