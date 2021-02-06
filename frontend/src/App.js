@@ -11,8 +11,7 @@ import Register from './components/auth/Register';
 import UserContext from "./context/UserContext";
 
 import "./style.css";
-import Submission from './components/layouts/Submission';
-import Fileslist from './components/layouts/FilesList';
+
 
 
 export default function App() {
