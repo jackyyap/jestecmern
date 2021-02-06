@@ -1,7 +1,9 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require("cors");
+const fileRoute = require('./routes/ManuscriptRouter');
 require('dotenv').config();
+require('./models/ManuscriptModel');
 
 //setup express
 
@@ -27,4 +29,5 @@ mongoose.connect(process.env.MONGODB_CONNECTION_STRING, {
 // setup routes
 
 app.use("/users", require("./routes/usersRouter"));
+app.use(fileRoute);
 

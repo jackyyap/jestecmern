@@ -6,11 +6,13 @@ const Users = require("../models/usersModel.js");
 
 router.post("/register", async (req, res) => {
     try {
-        let { email, password, passwordCheck, firstName, lastName, affiliation, title } = req.body;
+        let { email, password, passwordCheck, firstName, lastName, affiliation, title, orcidId } = req.body;
+        var regexorcid = /^\d{4}-\d{4}-\d{4}-(\d{3}X|\d{4})/g;
+        var validorcid = regexorcid.exec(orcidId);
 
         // validate
 
-        if (!email || !password || !passwordCheck || !firstName || !lastName || !affiliation || !title)
+        if (!email || !password || !passwordCheck || !firstName || !lastName || !affiliation || !title || !orcidId)
             return res
                 .status(400)
                 .json({ msg: "Not all fields have been entered" });
@@ -24,6 +26,11 @@ router.post("/register", async (req, res) => {
             return res
                 .status(400)
                 .json({ msg: "The password confirmation does not match" });
+
+        if (!validorcid)
+            return res
+                .status(400)
+                .json({ msg: "Orcid ID is invalid" });
 
         const existingUser = await Users.findOne({ email: email })
         if (existingUser)

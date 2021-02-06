@@ -1,136 +1,243 @@
-function AuthorModal () {
-	return(
-<>
-<form action="includes/author.inc.php"  method="post" enctype="multipart/form-data">
-  <div class="modal fade" id="submitManuscript" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLongTitle">Submit Manuscript</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-      
-      
-        <div class="modal-body">
-          <div class="accordion" id="accordionExample">
-            <div class="card">
-              <div class="card-header" id="headingOne">
-                <h2 class="mb-0">
-                  <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                    Author Details
-                  </button>
-                </h2>
+import React, { useState, useRef } from 'react';
+import { Form, Row, Col, Button } from 'react-bootstrap';
+import Dropzone from 'react-dropzone';
+import axios from 'axios';
+import { API_URL } from '../../utils/constant';
+
+const AuthorModal = (props) => {
+  const [file, setFile] = useState(null); // state for storing actual image
+
+  const [state, setState] = useState({
+    manuscriptTitle: '',
+    keyword: '',
+    track: '',
+    abstract: ''
+  });
+  const [errorMsg, setErrorMsg] = useState('');
+
+  const dropRef = useRef(); // React ref for managing the hover state of droppable area
+  const handleInputChange = (event) => {
+    setState({
+      ...state,
+      [event.target.name]: event.target.value
+    });
+  };
+
+  const onDrop = (files) => {
+    const [uploadedFile] = files;
+    setFile(uploadedFile);
+    const fileReader = new FileReader();
+
+    fileReader.readAsDataURL(uploadedFile);
+
+  };
+
+  const updateBorder = (dragState) => {
+    if (dragState === 'over') {
+      dropRef.current.style.border = '2px solid #000';
+    } else if (dragState === 'leave') {
+      dropRef.current.style.border = '2px dashed #e9ebeb';
+    }
+  };
+
+  const handleOnSubmit = async (event) => {
+    event.preventDefault();
+    try {
+      const { manuscriptTitle, keywords, track, abstract } = state;
+      if (manuscriptTitle.trim() !== '' && keywords.trim() !== '') {
+        if (file) {
+          const formData = new FormData();
+          formData.append('file', file);
+          formData.append('manuscriptTitle', manuscriptTitle);
+          formData.append('keywords', keywords);
+          formData.append('track', track);
+          formData.append('abstract', abstract);
+          setErrorMsg('');
+          await axios.post(`${API_URL}/upload`, formData, {
+            headers: {
+              'Content-Type': 'multipart/form-data'
+            }
+          });
+          window.location.reload();
+        } else {
+          setErrorMsg('Please select a file to add.');
+        }
+      } else {
+        setErrorMsg('Please enter all the field values.');
+      }
+    } catch (error) {
+      error.response && setErrorMsg(error.response.data);
+    }
+  };
+
+  return (
+    <>
+      <form className="search-form" onSubmit={handleOnSubmit}>
+        <div class="modal fade" id="submitManuscript" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Submit Manuscript</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
               </div>
 
-            <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
-              <div class="card-body">
-                      <div class="form-group">
-                        <div class="form-row">
-                          <div class="col-6">
-                            <small class="form-text text-muted mb-1">Select a JESTEC User</small>
-                            <input class="form-control mb-1" id="addAuthorSelection" list="usernames" />
-                            <datalist id="usernames">
-                              <option value="User1"></option>
-                              <option value="User2"></option>
-                              <option value="User3"></option>
-                            </datalist>
-                          </div>
-                          <div class="col-6">
-                            <small class="form-text text-muted mb-1">Or enter author details</small>
-                            <button class="btn btn-block btn-secondary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">Quick Add
+
+              <div class="modal-body">
+                <div class="accordion" id="accordionExample">
+                  <div class="card">
+                    <div class="card-header" id="headingOne">
+                      <h2 class="mb-0">
+                        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                          Author Details
+                  </button>
+                      </h2>
+                    </div>
+
+                    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+                      <div class="card-body">
+                        <div class="form-group">
+                          <div class="form-row">
+                            <div class="col-6">
+                              <small class="form-text text-muted mb-1">Select a JESTEC User</small>
+                              <input class="form-control mb-1" id="addAuthorSelection" list="usernames" />
+                              <datalist id="usernames">
+                                <option value="User1"></option>
+                                <option value="User2"></option>
+                                <option value="User3"></option>
+                              </datalist>
+                            </div>
+                            <div class="col-6">
+                              <small class="form-text text-muted mb-1">Or enter author details</small>
+                              <button class="btn btn-block btn-secondary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">Quick Add
                             </button>
+                            </div>
                           </div>
+                          <div class="collapse w-100 mb-2" id="collapseExample">
+                            <div class="form-row">
+                              <div class="form-group col-md-6">
+                                <label for="FirstName">First Name</label>
+                                <input type="text" class="form-control" id="FirstName" name="firstName" placeholder="First Name" />
+                              </div>
+                              <div class="form-group col-md-6">
+                                <label for="LastName">Last Name</label>
+                                <input type="text" class="form-control" id="LastName" name="lastName" placeholder="Last Name" />
+                              </div>
+                            </div>
+                            <div class="form-group">
+                              <label for="Email">Email</label>
+                              <input type="email" class="form-control" id="Email" name="authorsEmail" placeholder="Email" />
+                            </div>
+                            <div class="form-row">
+                              <div class="form-group col-md-6">
+                                <label for="Affiliation">Affiliation</label>
+                                <input type="text" class="form-control" id="Affiliation" name="affiliation" placeholder="Taylor's University" />
+                              </div>
+                              <div class="form-group col-md-6">
+                                <label for="Title">Title</label>
+                                <input type="text" class="form-control" id="Title" name="title" placeholder="Mr, Mrs, Dr, Prof" />
+                              </div>
+                            </div>
+                            <button type="button" class="btn btn-primary mb-2" id="quickAddAuthor">Add</button>
+                          </div>
+                          <input class="form-control" type="text" placeholder="No author added" readonly />
                         </div>
-                        <div class="collapse w-100 mb-2" id="collapseExample">
-                          <div class="form-row">
-                            <div class="form-group col-md-6">
-                              <label for="FirstName">First Name</label>
-                              <input type="text" class="form-control" id="FirstName" name="firstName" placeholder="First Name" />
-                            </div>
-                            <div class="form-group col-md-6">
-                              <label for="LastName">Last Name</label>
-                              <input type="text" class="form-control" id="LastName" name="lastName" placeholder="Last Name" />
-                            </div>
-                          </div>
-                          <div class="form-group">
-                            <label for="Email">Email</label>
-                            <input type="email" class="form-control" id="Email" name="authorsEmail" placeholder="Email" />
-                          </div>
-                          <div class="form-row">
-                            <div class="form-group col-md-6">
-                              <label for="Affiliation">Affiliation</label>
-                              <input type="text" class="form-control" id="Affiliation" name="affiliation" placeholder="Taylor's University" />
-                            </div>
-                            <div class="form-group col-md-6">
-                              <label for="Title">Title</label>
-                              <input type="text" class="form-control" id="Title" name="title" placeholder="Mr, Mrs, Dr, Prof" />
-                            </div>
-                          </div>
-                          <button type="button" class="btn btn-primary mb-2" id="quickAddAuthor">Add</button>
-                        </div>
-                        <input class="form-control" type="text" placeholder="No author added" readonly />
-                      </div>      
                       </div>
-              </div>
-            </div>
+                    </div>
+                  </div>
 
-            <div class="card">
-              <div class="card-header" id="headingTwo">
-                <h2 class="mb-0">
-                  <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                    Manuscript Details
+                  <div class="card">
+                    <div class="card-header" id="headingTwo">
+                      <h2 class="mb-0">
+                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                          Manuscript Details
                   </button>
-                </h2>
-              </div>
-              <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
-                <div class="card-body">
-                      <div class="form-group">
-                        <label for="manuscriptTitle" required>Manuscript Title</label>
-                        <input type="text" class="form-control" id="manuscriptTitle" name="manuscriptTitle" aria-describedby="emailHelp" placeholder="Enter manuscript title" />
+                      </h2>
+                    </div>
+                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                      <div class="card-body">
+                        <div class="form-group" controlId="manuscriptTitle">
+                          <label for="manuscriptTitle" required>Manuscript Title</label>
+                          <Form.Control
+                            type="text"
+                            name="manuscriptTitle"
+                            value={state.manuscriptTitle || ''}
+                            placeholder="Enter manuscript title"
+                            onChange={handleInputChange}
+                          />
+                        </div>
+                        <div class="form-group" controlId="keywords">
+                          <label for="keywords">Keyword(s)</label>
+                          <Form.Control
+                            type="text"
+                            name="keywords"
+                            value={state.keywords || ''}
+                            placeholder="Enter keywords"
+                            onChange={handleInputChange}
+                          />
+                          <small class="form-text text-muted">Separate keywords with commas (Keyword1, Keyword2)</small>
+                        </div>
+                        <div class="form-group" controlId="track">
+                          <label for="manuscriptTitle" required>Track</label>
+                          <Form.Control
+                            type="text"
+                            name="track"
+                            value={state.track || ''}
+                            onChange={handleInputChange}
+                          />
+                        </div>
+                        <div class="form-group" controlId="abstract">
+                          <label for="keywords">Abstract</label>
+                          <Form.Control
+                            type="text"
+                            name="abstract"
+                            value={state.abstract || ''}
+                            placeholder="Enter abstract"
+                            onChange={handleInputChange}
+                          />
+                        </div>
+                        <div class="form-group">
+                          <label for="manuscriptFile">Manuscript (PDF)</label>
+                          <div className="upload-section">
+                            <Dropzone onDrop={onDrop}
+                              onDragEnter={() => updateBorder('over')}
+                              onDragLeave={() => updateBorder('leave')}>
+                              {({ getRootProps, getInputProps }) => (
+                                <div {...getRootProps({ className: 'drop-zone' })} ref={dropRef}>
+                                  <input {...getInputProps()} />
+                                  <p>Drag and drop a file OR click here to select a file</p>
+                                  {file && (
+                                    <div>
+                                      <strong>Selected file:</strong> {file.name}
+                                    </div>
+                                  )}
+                                </div>
+                              )}
+                            </Dropzone>
+                          </div>
+                        </div>
+                        <div class="form-check">
+                          <input type="checkbox" class="form-check-input" id="exampleCheck1" required />
+                          <label class="form-check-label" for="exampleCheck1">I agree to the JESTEC <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a></label>
+                        </div>
                       </div>
-                      <div class="form-group">
-                        <label for="keywords">Keyword(s)</label>
-                        <textarea class="form-control" id="keywords" name="keywords" rows="1" required></textarea>
-                        <small class="form-text text-muted">Separate keywords with commas (Keyword1, Keyword2)</small>
-                      </div>
-                      <div class="form-group">
-                        <label for="manuscriptTitle" required>Track</label>
-                        <select class="custom-select" id="track" name="track">
-                          <option selected>Select track</option>
-                          <option value="1">Science</option>
-                          <option value="2">Engineering</option>
-                          <option value="3">Computing/IT</option>
-                        </select>   
-                      </div>
-                      <div class="form-group">
-                        <label for="keywords">Abstract</label>
-                        <textarea class="form-control" id="keywords" name="abstract" rows="3" required></textarea>
-                      </div>
-                      <div class="form-group">
-                        <label for="manuscriptFile">Manuscript (PDF)</label>
-                        <input type="file" class="form-control-file" id="manuscriptFile" name="file" required />
-                      </div>
-                      <div class="form-check">
-                        <input type="checkbox" class="form-check-input" id="exampleCheck1" required />
-                        <label class="form-check-label" for="exampleCheck1">I agree to the JESTEC <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a></label>
-                      </div>
+                    </div>
+                  </div>
                 </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <Button variant="primary" type="submit">
+                  Submit
+                </Button>
               </div>
             </div>
           </div>
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="submit" class="btn btn-primary" id="SubmitBtn" name="submitManuscript">Submit</button>
-        </div>
-      </div>
-    </div>
-  </div>
-</form>
-</>
-	);
+      </form>
+    </>
+  );
 }
 
 export default AuthorModal;
