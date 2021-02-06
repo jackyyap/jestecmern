@@ -9,8 +9,7 @@ import Register from './components/auth/Register';
 import UserContext from "./context/UserContext";
 
 import "./style.css";
-import Submission from './components/layouts/Submission';
-import Fileslist from './components/layouts/FilesList';
+
 
 
 export default function App() {
@@ -59,8 +58,6 @@ export default function App() {
                     <Route path="/dashboard" component={Dashboard} />
                     <Route path="/login" component={Login} />
                     <Route path="/register" component={Register} />
-                    <Route path="/submission" component={Submission} />
-                    <Route path="/fileslist" component={Fileslist} />
                 </Switch>
             </UserContext.Provider>
         </BrowserRouter>
