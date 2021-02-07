@@ -3,12 +3,12 @@ import {useHistory} from "react-router-dom";
 import UserContext from "../../context/UserContext";
 
 export default function Home() {
-  const {userData} = useContext(UserContext);
-  const history = useHistory();
+  // const {userData} = useContext(UserContext);
+  // const history = useHistory();
 
-  useEffect(() => {
-    if (!userData.user) history.push("/login");
-  })
+  // useEffect(() => {
+  //   if (!userData.user) history.push("/login");
+  // })
 
   return (
     <header class="masthead">
