@@ -38,6 +38,12 @@ router.post("/register", async (req, res) => {
                 .status(400)
                 .json({ msg: "Account already exists" });
 
+        const existingOrcidId = await Users.findOne({ orcidId: orcidId })
+        if (existingOrcidId)
+            return res
+                .status(400)
+                .json({ msg: "Orcid ID already exists" });
+
 
 
         // password encryption
@@ -52,6 +58,7 @@ router.post("/register", async (req, res) => {
             lastName,
             affiliation,
             title,
+            orcidId,
         });
 
         const savedUser = await newUser.save();
