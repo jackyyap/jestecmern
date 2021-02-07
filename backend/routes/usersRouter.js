@@ -30,7 +30,7 @@ router.post("/register", async (req, res) => {
         if (!validorcid)
             return res
                 .status(400)
-                .json({ msg: "Orcid ID is invalid" });
+                .json({ msg: "ORCID ID is invalid" });
 
         const existingUser = await Users.findOne({ email: email })
         if (existingUser)
@@ -42,7 +42,7 @@ router.post("/register", async (req, res) => {
         if (existingOrcidId)
             return res
                 .status(400)
-                .json({ msg: "Orcid ID already exists" });
+                .json({ msg: "ORCID ID already exists" });
 
 
 
