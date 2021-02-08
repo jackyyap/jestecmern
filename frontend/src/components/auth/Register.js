@@ -150,10 +150,10 @@ export default function Register() {
                   id="register-orcid"
                   onChange={(e) => setOrcidId(e.target.value)}
                   class="form-control"
-                  placeholder="0000-0000-0000-0000"
+                  placeholder="https://orcid.org/0000-0000-0000-0000"
                   
                   autofocus />
-                <small class="text-muted">Please provide ORCID ID</small>
+                <small class="text-muted">Please provide full ORCID ID link</small>
               </div>
             </div>
 

@@ -63,7 +63,6 @@ export default function App() {
                     <Route path="/register" component={Register} />
                     <Route path="/archive" component={Archive} />
                     <Route path="/articlereader" component={ArticleReader} />
-                    <Route path="/reviewer-reader" component={ReviewerReader} />
                 </Switch>
             </UserContext.Provider>
         </BrowserRouter>
