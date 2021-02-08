@@ -30,13 +30,19 @@ router.post("/register", async (req, res) => {
         if (!validorcid)
             return res
                 .status(400)
-                .json({ msg: "Orcid ID is invalid" });
+                .json({ msg: "ORCID ID is invalid" });
 
         const existingUser = await Users.findOne({ email: email })
         if (existingUser)
             return res
                 .status(400)
                 .json({ msg: "Account already exists" });
+
+        const existingOrcidId = await Users.findOne({ orcidId: orcidId })
+        if (existingOrcidId)
+            return res
+                .status(400)
+                .json({ msg: "ORCID ID already exists" });
 
 
 
@@ -52,6 +58,7 @@ router.post("/register", async (req, res) => {
             lastName,
             affiliation,
             title,
+            orcidId,
         });
 
         const savedUser = await newUser.save();
