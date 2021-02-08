@@ -10,7 +10,7 @@ class Job extends React.Component {
 
 	render() {
 		return (
-			<div class="d-flex mb-2 bg-primary rounded text-light details">
+			<div class="d-flex mb-2 bg-secondary rounded text-light details">
 		      <div class="col-sm-6">
 		        000
 		      </div>

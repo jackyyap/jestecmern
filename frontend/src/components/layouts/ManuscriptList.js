@@ -1,6 +1,4 @@
-import Manuscript from '../classes/Manuscript';
 import React, { useState, useEffect } from 'react';
-
 import axios from 'axios';
 import { API_URL } from '../../utils/constant';
 
@@ -20,40 +18,47 @@ const ManuscriptList = () => {
 		getFilesList();
 	}, []);
 
-
+// <div class="col-sm-2">Manu. ID</div>
+// 					<div class="col-sm-5">Manuscript Title</div>
+// 					<div class="col-sm-2">Date Submitted</div>
+// 					<div class="col-sm-2">Review By</div>
+// 					<div class="col-sm-1">
 	return (
-		<div className="files-container p-5 text-light">
-			<table className="files-table">
-				<thead>
-					<tr>
-						<th>Manuscript Title</th>
-						<th>Keywords</th>
-						<th>Track</th>
-						<th>Abstract</th>
-					</tr>
-				</thead>
-				<tbody>
+	<>
+		<div className="files-container text-light">
+			<div className="files-table">
+				<div className="row text-light list-header">
+					<div className="col-sm-2">Manu. ID</div>
+					<div className="col-sm-4">Manuscript Title</div>
+					<div className="col-sm-2">Keywords</div>
+					<div className="col-sm-2">Track</div>
+					<div className="col-sm-2">Abstract</div>
+				</div>
+				<div className="manuscript-list px-2">
 					{filesList.length > 0 ? (
 						filesList.map(
 							({ _id, manuscriptTitle, keywords, track, abstract, file_path, file_mimetype }) => (
-								<tr key={_id}>
-									<td className="manuscript-title">{manuscriptTitle}</td>
-									<td className="keywords">{keywords}</td>
-									<td className="track">{track}</td>
-									<td className="abstract">{abstract}</td>
-								</tr>
+					<div key={_id} className="row rounded text-light shadow-sm bg-secondary align-items-center details">
+						<div className="manuscript-id col-sm-2"></div>
+						<div className="manuscript-title col-sm-4">{manuscriptTitle}</div>
+						<div className="keywords col-sm-2">{keywords}</div>
+						<div className="track col-sm-2">{track}</div>
+						<div className="abstract col-sm-2">{abstract}</div>
+					</div>
 							)
 						)
 					) : (
-							<tr>
-								<td colSpan={3} style={{ fontWeight: '300' }}>
-									No files found. Please add some.
-              </td>
-							</tr>
-						)}
-				</tbody>
-			</table>
+							<div className="text-light text-center">
+								<strong>
+								You haven't submitted any manuscripts yet.
+								</strong>
+							</div>
+						)
+					}
+				</div>
+			</div>
 		</div>
+	</>
 	);
 };
 
