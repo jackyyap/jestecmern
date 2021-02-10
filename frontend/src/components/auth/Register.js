@@ -16,6 +16,7 @@ export default function Register() {
   const [title, setTitle] = useState();
   const [orcidId, setOrcidId] = useState();
   const [error, setError] = useState();
+  const [manuscripts, setManuscripts] = useState();
 
   const { setUserData } = useContext(UserContext);
   const history = useHistory();

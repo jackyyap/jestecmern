@@ -11,7 +11,7 @@ const AuthorModal = (props) => {
     manuscriptTitle: '',
     keyword: '',
     track: '',
-    abstract: ''
+    abstract: '',
   });
   const [errorMsg, setErrorMsg] = useState('');
 
