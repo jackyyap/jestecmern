@@ -15,6 +15,7 @@ export default function Register() {
   const [affiliation, setAffiliation] = useState();
   const [title, setTitle] = useState();
   const [error, setError] = useState();
+  const [manuscripts, setManuscripts] = useState();
 
   const { setUserData } = useContext(UserContext);
   const history = useHistory();
@@ -23,7 +24,7 @@ export default function Register() {
     e.preventDefault();
 
     try {
-      const newUser = { email, password, passwordCheck, firstName, lastName, affiliation, title };
+      const newUser = { email, password, passwordCheck, firstName, lastName, affiliation, title, manuscripts };
       await Axios.post(
         "http://localhost:5000/users/register",
         newUser

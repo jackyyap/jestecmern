@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+
 const ManuscriptSchema = mongoose.Schema(
     {
         manuscriptTitle: {
@@ -28,6 +29,11 @@ const ManuscriptSchema = mongoose.Schema(
         file_mimetype: {
             type: String,
             required: true
+        },
+        manuscriptId: {
+            type: String,
+            required: true,
+            unique: true
         }
     },
     {

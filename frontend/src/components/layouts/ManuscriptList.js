@@ -37,9 +37,9 @@ const ManuscriptList = () => {
 				<div className="manuscript-list px-2">
 					{filesList.length > 0 ? (
 						filesList.map(
-							({ _id, manuscriptTitle, keywords, track, abstract, file_path, file_mimetype }) => (
+							({ _id, manuscriptTitle, keywords, track, abstract, file_path, file_mimetype, manuscriptId }) => (
 					<div key={_id} className="row rounded text-light shadow-sm bg-secondary align-items-center details">
-						<div className="manuscript-id col-sm-2"></div>
+						<div className="manuscript-id col-sm-2">{manuscriptId}</div>
 						<div className="manuscript-title col-sm-4">{manuscriptTitle}</div>
 						<div className="keywords col-sm-2">{keywords}</div>
 						<div className="track col-sm-2">{track}</div>
