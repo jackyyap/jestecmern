@@ -99,3 +99,26 @@ input[type="submit"] {
     border-radius: 50%;
     background-color: rgb(229, 194, 194);
 }
+
+/* manuscript list */
+.list-header {
+    margin-left: .5rem;
+    margin-right: 2rem;
+}
+
+.manuscript-list {
+    height: 32rem;
+    overflow-y: auto;
+    overflow-x: hidden;
+    margin-bottom: 1rem;
+}
+
+.manuscript-list .row {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* reviewer reader */
+.review-form {
+    width: 60rem;
+}

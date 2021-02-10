@@ -16,6 +16,7 @@ export default function Register() {
   const [title, setTitle] = useState();
   const [orcidId, setOrcidId] = useState();
   const [error, setError] = useState();
+  const [manuscripts, setManuscripts] = useState();
 
   const { setUserData } = useContext(UserContext);
   const history = useHistory();
@@ -24,7 +25,7 @@ export default function Register() {
     e.preventDefault();
 
     try {
-      const newUser = { email, password, passwordCheck, firstName, lastName, affiliation, title, orcidId};
+      const newUser = { email, password, passwordCheck, firstName, lastName, affiliation, title, orcidId };
       await Axios.post(
         "http://localhost:5000/users/register",
         newUser
@@ -153,7 +154,7 @@ export default function Register() {
                   placeholder="https://orcid.org/0000-0000-0000-0000"
                   
                   autofocus />
-                <small class="text-muted">Please provide full ORCID link</small>
+                <small class="text-muted">Please provide full ORCID ID link</small>
               </div>
             </div>
 

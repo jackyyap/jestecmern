@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+
 const userSchema = new mongoose.Schema({
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true, minlength: 8 },
@@ -6,9 +7,8 @@ const userSchema = new mongoose.Schema({
     lastName: { type: String },
     affiliation: { type: String },
     title: { type: String },
-    userRole: {type: Array, required: true, default: "author"}
-
-    
+    orcidId: { type: String },
+    userRole: {type: String, required: true, default: "author"}
 });
 
 module.exports = Users = mongoose.model("Users", userSchema);

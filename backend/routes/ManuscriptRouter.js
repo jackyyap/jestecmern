@@ -27,11 +27,32 @@ const upload = multer({
         cb(undefined, true); // continue with upload
     }
 });
+
+function makeid(length) {
+   var result           = '';
+   var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+   var charactersLength = characters.length;
+   for ( var i = 0; i < length; i++ ) {
+      result += characters.charAt(Math.floor(Math.random() * charactersLength));
+   }
+   return result;
+}
+
 Router.post(
     '/upload',
     upload.single('file'),
     async (req, res) => {
         try {
+            const date = new Date();
+            const year = date.getFullYear();  
+            const month = date.getMonth() + 1;
+
+            const yearStr = year.toString();
+            const monthStr = month.toString();
+
+            const manuid = yearStr+"-"+monthStr+"-"+makeid(4);
+
+            console.log(manuid);
             const { manuscriptTitle, keywords, track, abstract } = req.body;
             const { path, mimetype } = req.file;
             const file = new File({
@@ -40,12 +61,13 @@ Router.post(
                 track,
                 abstract,
                 file_path: path,
-                file_mimetype: mimetype
+                file_mimetype: mimetype,
+                manuscriptId: manuid
             });
             await file.save();
             res.send('file uploaded successfully.');
         } catch (error) {
-            res.status(400).send('Error while uploading file. Try again later.');
+            res.status(400).send(error);
         }
     },
     (error, req, res, next) => {
