@@ -8,7 +8,7 @@ const userSchema = new mongoose.Schema({
     affiliation: { type: String },
     title: { type: String },
     orcidId: { type: String },
-    userRole: {type: Array, required: true, default: "author"}
+    userRole: {type: String, required: true, default: "author"}
 });
 
 module.exports = Users = mongoose.model("Users", userSchema);
