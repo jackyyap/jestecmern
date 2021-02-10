@@ -7,7 +7,7 @@ const Users = require("../models/usersModel.js");
 router.post("/register", async (req, res) => {
     try {
         let { email, password, passwordCheck, firstName, lastName, affiliation, title, orcidId } = req.body;
-        var regexorcid = /^\d{4}-\d{4}-\d{4}-(\d{3}X|\d{4})/g;
+        var regexorcid = /https:\/\/orcid.org\/\d{4}-\d{4}-\d{4}-(\d{3}X|\d{4})/g;
         var validorcid = regexorcid.exec(orcidId);
 
         // validate

@@ -14,6 +14,7 @@ export default function Register() {
   const [lastName, setLastName] = useState();
   const [affiliation, setAffiliation] = useState();
   const [title, setTitle] = useState();
+  const [orcidId, setOrcidId] = useState();
   const [error, setError] = useState();
 
   const { setUserData } = useContext(UserContext);
@@ -23,7 +24,7 @@ export default function Register() {
     e.preventDefault();
 
     try {
-      const newUser = { email, password, passwordCheck, firstName, lastName, affiliation, title };
+      const newUser = { email, password, passwordCheck, firstName, lastName, affiliation, title, orcidId};
       await Axios.post(
         "http://localhost:5000/users/register",
         newUser
@@ -147,7 +148,7 @@ export default function Register() {
                 <input
                   type="text"
                   id="register-orcid"
-                  //onChange={(e) => setAffiliation(e.target.value)}
+                  onChange={(e) => setOrcidId(e.target.value)}
                   class="form-control"
                   placeholder="https://orcid.org/0000-0000-0000-0000"
                   

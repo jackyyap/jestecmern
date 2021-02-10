@@ -63,8 +63,8 @@ export default function App() {
                     <Route path="/register" component={Register} />
                     <Route path="/archive" component={Archive} />
                     <Route path="/articlereader" component={ArticleReader} />
-                    <Route path="/submission" component={Submission} />
-                    <Route path="/fileslist" component={Fileslist} />
+                    {/* <Route path="/submission" component={Submission} />
+                    <Route path="/fileslist" component={Fileslist} /> */}
                 </Switch>
             </UserContext.Provider>
         </BrowserRouter>
