@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Form, Row, Col, Button } from 'react-bootstrap';
 import Dropzone from 'react-dropzone';
 import axios from 'axios';
@@ -6,19 +6,45 @@ import { API_URL } from '../../utils/constant';
 
 const AuthorModal = (props) => {
   const [file, setFile] = useState(null); // state for storing actual image
-
+  const [usersList, setUsersList] = useState([]);
   const [state, setState] = useState({
     manuscriptTitle: '',
     keyword: '',
     track: '',
     abstract: '',
   });
+
+  useEffect(() => {
+    const displayUsers = async () => {
+      try {
+        const { data } = await axios.get(`${API_URL}/getUsers`);
+        setErrorMsg('');
+        setUsersList(data);
+      } catch (error) {
+        error.response && setErrorMsg(error.response.data);
+      }
+    };
+    displayUsers();
+  }, []);
+
+  const [author, setAuthor] = useState({
+    firstName: '',
+    lastName: ''
+  })
+
   const [errorMsg, setErrorMsg] = useState('');
 
   const dropRef = useRef(); // React ref for managing the hover state of droppable area
   const handleInputChange = (event) => {
     setState({
       ...state,
+      [event.target.name]: event.target.value
+    });
+  };
+
+  const handleAddAuthor = (event) => {
+    setAuthor({
+      ...author,
       [event.target.name]: event.target.value
     });
   };
@@ -43,15 +69,17 @@ const AuthorModal = (props) => {
   const handleOnSubmit = async (event) => {
     event.preventDefault();
     try {
-      const { manuscriptTitle, keywords, track, abstract } = state;
+      const {manuscriptTitle, keywords, track, abstract } = state;
+      const authors = document.getElementById('authors').value;
       if (manuscriptTitle.trim() !== '' && keywords.trim() !== '') {
         if (file) {
-          const formData = new FormData();
-          formData.append('file', file);
+          let formData = new FormData();
+          formData.append('authors', authors);
           formData.append('manuscriptTitle', manuscriptTitle);
           formData.append('keywords', keywords);
           formData.append('track', track);
           formData.append('abstract', abstract);
+          formData.append('file', file);
           setErrorMsg('');
           await axios.post(`${API_URL}/upload`, formData, {
             headers: {
@@ -68,6 +96,27 @@ const AuthorModal = (props) => {
     } catch (error) {
       error.response && setErrorMsg(error.response.data);
     }
+  };
+
+  const addAuthor = (event) => {
+    try {
+      const { firstName, lastName} = author;
+      if (firstName.trim() !== '' && lastName.trim() !== '') {
+        let authorName = lastName + ", " + firstName.charAt(0) + "., ";
+        let authorList = document.getElementById("authors");
+        authorList.value += authorName;
+        document.getElementById("FirstName").value = '';
+        document.getElementById("LastName").value = '';
+      } else {
+        setErrorMsg('Please enter all the field values.');
+      }
+    } catch (error) {
+      error.response && setErrorMsg(error.response.data);
+    }
+  };
+
+  const clearAuthors = (event) => {
+    document.getElementById("authors").value = '';
   };
 
   return (
@@ -103,9 +152,16 @@ const AuthorModal = (props) => {
                               <small class="form-text text-muted mb-1">Select a JESTEC User</small>
                               <input class="form-control mb-1" id="addAuthorSelection" list="usernames" />
                               <datalist id="usernames">
-                                <option value="User1"></option>
-                                <option value="User2"></option>
-                                <option value="User3"></option>
+                                {usersList.length > 0 ? (
+                                    usersList.map(
+                                      ({ _id, email, firstName }) => (
+                                      <option value="_id">{firstName}: {email}</option>
+                                      )
+                                    )
+                                  ) : (
+                                      <h5>No users found</h5>
+                                    )
+                                  }
                               </datalist>
                             </div>
                             <div class="col-6">
@@ -118,30 +174,34 @@ const AuthorModal = (props) => {
                             <div class="form-row">
                               <div class="form-group col-md-6">
                                 <label for="FirstName">First Name</label>
-                                <input type="text" class="form-control" id="FirstName" name="firstName" placeholder="First Name" />
+                                <input 
+                                  type="text" 
+                                  class="form-control" 
+                                  id="FirstName" 
+                                  name="firstName" 
+                                  placeholder="First Name"
+                                  value={author.firstName || ''}
+                                  onChange={handleAddAuthor} />
                               </div>
                               <div class="form-group col-md-6">
                                 <label for="LastName">Last Name</label>
-                                <input type="text" class="form-control" id="LastName" name="lastName" placeholder="Last Name" />
+                                <input 
+                                  type="text" 
+                                  class="form-control" 
+                                  id="LastName" 
+                                  name="lastName" 
+                                  placeholder="Last Name"
+                                  value={author.lastName || ''}
+                                  onChange={handleAddAuthor} />
                               </div>
                             </div>
-                            <div class="form-group">
-                              <label for="Email">Email</label>
-                              <input type="email" class="form-control" id="Email" name="authorsEmail" placeholder="Email" />
-                            </div>
+                            
                             <div class="form-row">
-                              <div class="form-group col-md-6">
-                                <label for="Affiliation">Affiliation</label>
-                                <input type="text" class="form-control" id="Affiliation" name="affiliation" placeholder="Taylor's University" />
-                              </div>
-                              <div class="form-group col-md-6">
-                                <label for="Title">Title</label>
-                                <input type="text" class="form-control" id="Title" name="title" placeholder="Mr, Mrs, Dr, Prof" />
-                              </div>
+                              <button type="button" class="btn btn-primary mb-2 mr-1" id="quickAddAuthor" onClick={addAuthor}>Add</button>
+                              <button type="button" class="btn btn-danger mb-2" id="clearAuthors" onClick={clearAuthors}>Clear</button>
                             </div>
-                            <button type="button" class="btn btn-primary mb-2" id="quickAddAuthor">Add</button>
                           </div>
-                          <input class="form-control" type="text" placeholder="No author added" readonly />
+                          <input id="authors" class="form-control" type="text" placeholder="No author added" readonly="true" />
                         </div>
                       </div>
                     </div>

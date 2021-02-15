@@ -18,11 +18,6 @@ const ManuscriptList = () => {
 		getFilesList();
 	}, []);
 
-// <div class="col-sm-2">Manu. ID</div>
-// 					<div class="col-sm-5">Manuscript Title</div>
-// 					<div class="col-sm-2">Date Submitted</div>
-// 					<div class="col-sm-2">Review By</div>
-// 					<div class="col-sm-1">
 	return (
 	<>
 		<div className="files-container text-light">

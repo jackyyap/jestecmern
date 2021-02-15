@@ -2,6 +2,7 @@ const path = require('path');
 const express = require('express');
 const multer = require('multer');
 const File = require('../models/ManuscriptModel');
+const User = require('../models/usersModel');
 const Router = express.Router();
 
 const upload = multer({
@@ -62,7 +63,8 @@ Router.post(
                 abstract,
                 file_path: path,
                 file_mimetype: mimetype,
-                manuscriptId: manuid
+                manuscriptId: manuid,
+                status: "Submitted"
             });
             await file.save();
             res.send('file uploaded successfully.');
@@ -87,6 +89,17 @@ Router.get('/getAllFiles', async (req, res) => {
         res.status(400).send('Error while getting list of files. Try again later.');
     }
 });
+Router.get('/getUsers', async (req, res) => {
+    try {
+        const users = await User.find({});
+        const sortedByCreationDate = files.sort(
+            (a, b) => b.createdAt - a.createdAt
+        );
+        res.send(sortedByCreationDate);
+    } catch (error) {
+        res.status(400).send('Error while getting list of files. Try again later.');
+    }
+});
 Router.get('/download/:id', async (req, res) => {
     try {
         const file = await File.findById(req.params.id);
@@ -98,4 +111,14 @@ Router.get('/download/:id', async (req, res) => {
         res.status(400).send('Error while downloading file. Try again later.');
     }
 });
+
+// Router.get('/editormodal/:id', async (req, res) => {
+//     try {
+//         const modal = await File.findById(req.params.id);
+//         res.send(modal);
+//     } catch (error) {
+//         res.status(400).send('Error while getting list of files. Try again later.');
+//     }
+// });
+
 module.exports = Router;

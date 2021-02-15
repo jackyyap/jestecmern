@@ -34,6 +34,22 @@ const ManuscriptSchema = mongoose.Schema(
             type: String,
             required: true,
             unique: true
+        },
+        status: {
+            type: String,
+            default: "Submitted"
+        },
+        assignedEditor: {
+            type: String,
+            default: ""
+        },
+        assignedReviewer: {
+            type: String,
+            default: ""
+        },
+        authors: {
+            type: String,
+            default: ""
         }
     },
     {
