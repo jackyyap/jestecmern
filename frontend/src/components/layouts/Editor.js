@@ -2,6 +2,7 @@ import EditorManuscriptList from './EditorManuscriptList';
 import DashboardHeader from '../layouts/DashboardHeader';
 import EditorJobTracker from './EditorJobTracker';
 import Filter from './Filter';
+import EditorModal from '../layouts/EditorModal';
 
 function Editor (){
 	return(
@@ -23,6 +24,7 @@ function Editor (){
           </div>
       </div>
     </header>
+    <EditorModal />
     </>
   	);
 }
