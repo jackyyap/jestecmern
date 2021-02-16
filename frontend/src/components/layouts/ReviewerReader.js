@@ -111,12 +111,25 @@ const ReviewerReader = (props) => {
 						<form>
 							<div class="card review-form">
 								<div class="card-body">
-									<h5 class="card-title text-success">
-										Manuscript Title
-						</h5>
-									<span class="badge badge-info mr-1 mb-1">Keywords</span>
-									<span class="badge badge-info mr-1 mb-1">Keywords</span>
-
+									<div class="form-row">
+										<div class="col-2">
+											<input 
+			                                  type="text" 
+			                                  class="form-control" 
+			                                  id="manuscriptId" 
+			                                  name="manuscriptId" 
+			                                  placeholder="YYYY-M-XXXX" />
+			                            </div>
+			                            <div class="col-10">
+			                            	<input 
+			                                  type="text" 
+			                                  class="form-control" 
+			                                  id="manuscriptTitle" 
+			                                  name="manuscriptTitle" 
+			                                  placeholder="Manuscript Title"
+			                                  readonly="true" />
+			                            </div>
+	                                </div>
 									<hr />
 									<div class="accordion" id="accordionExample">
 										<div class="card">
