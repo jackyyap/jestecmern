@@ -7,7 +7,7 @@ function Author (){
 <>
 	<header class="masthead py-5">
     <div class="container-fluid h-100">
-      <DashboardHeader name="Bob" />
+      <DashboardHeader/>
         
       <div class="d-flex">
             <div class="col-sm-3 col-md-2">
