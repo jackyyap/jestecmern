@@ -1,4 +1,4 @@
-import ManuscriptList from './ManuscriptList';
+import ReviewerManuscriptList from './ReviewerManuscriptList';
 import ReviewerJobTracker from './ReviewerJobTracker';
 import Filter from './Filter';
 import DashboardHeader from '../layouts/DashboardHeader';
@@ -15,7 +15,7 @@ function Reviewer (){
               <Filter />
             </div>
             <div class="container col-sm-5 col-md-7">
-            	<ManuscriptList />
+            	<ReviewerManuscriptList />
             </div>
             <div class="col-sm-3 col-md-2">
               <ReviewerJobTracker />
