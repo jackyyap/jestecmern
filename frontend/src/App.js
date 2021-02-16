@@ -10,6 +10,8 @@ import Login from './components/auth/Login';
 import Register from './components/auth/Register';
 import UserContext from "./context/UserContext";
 
+import FilesList from './components/layouts/FilesList';
+
 import "./style.css";
 
 
@@ -63,6 +65,8 @@ export default function App() {
                     <Route path="/register" component={Register} />
                     <Route path="/archive" component={Archive} />
                     <Route path="/articlereader" component={ArticleReader} />
+                    <Route path="/fileslist" component={FilesList} />
+
                 </Switch>
             </UserContext.Provider>
         </BrowserRouter>

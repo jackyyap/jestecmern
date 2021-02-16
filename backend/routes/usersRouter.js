@@ -145,14 +145,14 @@ router.post("/tokenIsValid", async (req, res) => {
 
 //get user document
 
-// router.get("/", auth, async (req, res) => {
-//     const user = await Users.findById(req.user);
-//     res.json({
-//         firstName: user.firstName,
-//         id: user._id,
-//         userRole: user.userRole,
-//     });
-// });
+router.get("/", auth, async (req, res) => {
+    const user = await Users.findById(req.user);
+    res.json({
+        firstName: user.firstName,
+        id: user._id,
+        userRole: user.userRole,
+    });
+});
 
 
 //protected routes
