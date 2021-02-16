@@ -23,13 +23,13 @@ const EditorManuscriptList = () => {
 	function setProgress(status) {
 		const percent = 0;
 		switch(status) {
-	      case 'AssignEditor':
+	      case 'EditorAssigned':
 	        percent = 10;
 	        break;
-	      case 'AssignReviewer':
+	      case 'ReviewerAssigned':
 	        percent = 20;
 	        break;
-	      case 'PendingReviewerReq':
+	      case 'ReviewerReqConfirmed':
 	        percent = 30;
 	        break;
 	      case 'InReview':

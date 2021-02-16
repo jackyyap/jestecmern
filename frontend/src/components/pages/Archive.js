@@ -26,6 +26,7 @@ function Archive() {
 			    	</div>
 			    	<hr class="border-light" />
 					
+				<div class="accordion">
 					<div class="media">
 					  <div class="media-body">
 					    <h5 id="volume-1" class="mt-0">
@@ -156,6 +157,7 @@ function Archive() {
 						  </div>
 						</div>
 					</div>
+				</div>
 				</div>
 
 				<div class="col-sm-2">

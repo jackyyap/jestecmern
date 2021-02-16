@@ -8,6 +8,9 @@ export default function AuthOptions() {
 
     const history = useHistory();
 
+    const author = () => history.push("/dashboard/author")
+    const reviewer = () => history.push("/dashboard/reviewer")
+    const editor = () => history.push("/dashboard/editor")
     const register = () => history.push("/register")
     const login = () => history.push("/login")
     const logout = () => {
@@ -21,7 +24,26 @@ export default function AuthOptions() {
     return (
         <nav className="auth-options"> {
             userData.user ? (
-                <a className="btn btn-link" onClick={logout}>Logout</a>
+                <ul class="navbar-nav">
+                    <div class="dropdown">
+                        <button 
+                            class="btn btn-danger dropdown-toggle" 
+                            type="button" id="dashboardDropdown" 
+                            data-toggle="dropdown" 
+                            aria-haspopup="true" 
+                            aria-expanded="false">
+                            Dashboard
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" onClick={author}>Author</a>
+                            <a class="dropdown-item" onClick={reviewer}>Reviewer</a>
+                            <a class="dropdown-item" onClick={editor}>Editor</a>
+                        </div>
+                    </div>
+                    <li class="nav-item">
+                        <a className="btn btn-link text-light" onClick={logout}>Logout</a>
+                    </li>
+                </ul>
             ) : (
                     <>
                     <ul class="navbar-nav">
