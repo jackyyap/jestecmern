@@ -1,6 +1,7 @@
 const jwt = require("jsonwebtoken");
+const Users = require("./../models/usersModel");
 
-const auth = (req, res, next) => {
+const auth = async (req, res, next) => {
     try {
         const token = req.header("x-auth-token");
         if (!token)
@@ -14,14 +15,28 @@ const auth = (req, res, next) => {
                 .status(401)
                 .json({ msg: "Token verification failed, access denied." });
 
-        req.user = verified.id;
+        const user = await Users.findById(verified.id);
+        req.user = user;
         next();
 
     } catch (err) {
         res
             .status(500)
             .json({ error: err.message });
-    }
+    };
 };
 
-module.exports = auth;
+const authRole = (...roles) => {
+    return (req, res, next) => {
+        console.log(roles);
+        if (!roles.includes(req.user.userRole)) {
+            return res
+                .status(401)
+                .json({ msg: "You are not authorized to access this page" });
+        }
+        next();
+    };
+};
+
+
+module.exports = { auth, authRole };

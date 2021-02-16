@@ -2,3 +2,5 @@
 /node_modules
 /files
 .eslintcache
+/backend/.env
+/frontend/.env

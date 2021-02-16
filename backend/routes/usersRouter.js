@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const auth = require("../middleware/auth");
+const {auth, authRole} = require("../middleware/auth");
 const Users = require("../models/usersModel.js");
 
 router.post("/register", async (req, res) => {
@@ -112,14 +112,14 @@ router.post("/login", async (req, res) => {
     }
 });
 
-router.delete("/delete", auth, async (req, res) => {
-    try {
-        const deletedUser = await Users.findByIdAndDelete(req.user);
-        res.json(deletedUser);
-    } catch (err) {
-        res.status(500).json({ error: err.message });
-    }
-});
+// router.delete("/delete", auth, async (req, res) => {
+//     try {
+//         const deletedUser = await Users.findByIdAndDelete(req.user);
+//         res.json(deletedUser);
+//     } catch (err) {
+//         res.status(500).json({ error: err.message });
+//     }
+// });
 
 router.post("/tokenIsValid", async (req, res) => {
     try {
@@ -145,13 +145,24 @@ router.post("/tokenIsValid", async (req, res) => {
 
 //get user document
 
-router.get("/", auth, async (req, res) => {
-    const user = await Users.findById(req.user);
-    res.json({
-        firstName: user.firstName,
-        id: user._id,
-        userRole: user.userRole,
-    });
+// router.get("/", auth, async (req, res) => {
+//     const user = await Users.findById(req.user);
+//     res.json({
+//         firstName: user.firstName,
+//         id: user._id,
+//         userRole: user.userRole,
+//     });
+// });
+
+
+//protected routes
+
+router.get("/auth-author", auth, authRole("author"), async (req, res) => {
+    return res.json(true)
+});
+
+router.get("/auth-editor", auth, authRole("editor"), async (req, res) => {
+    return res.json(true)
 });
 
 module.exports = router;
