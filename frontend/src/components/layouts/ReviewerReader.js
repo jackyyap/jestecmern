@@ -104,13 +104,11 @@ const ReviewerReader = (props) => {
 
 	return (
 		<>
-			<header class="masthead py-5">
-				<div class="container-fluid">
 					<div class="container d-flex justify-content-center">
 
 						<form>
 							<div class="card review-form">
-								<div class="card-body">
+								<div class="card-header">
 									<div class="form-row">
 										<div class="col-2">
 											<input 
@@ -130,7 +128,8 @@ const ReviewerReader = (props) => {
 			                                  readonly="true" />
 			                            </div>
 	                                </div>
-									<hr />
+								</div>
+								<div class="card-body">
 									<div class="accordion" id="accordionExample">
 										<div class="card">
 											<div class="card-header" id="headingOne">
@@ -361,8 +360,6 @@ const ReviewerReader = (props) => {
 							</div>
 						</form>
 					</div>
-				</div>
-			</header>
 		</>
 	);
 }

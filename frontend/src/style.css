@@ -122,3 +122,10 @@ input[type="submit"] {
 .review-form {
     width: 60rem;
 }
+
+.job-tracker {
+    height: 32rem;
+    overflow-y: auto;
+    overflow-x: hidden;
+    margin-bottom: 1rem;
+}
