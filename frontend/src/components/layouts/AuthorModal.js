@@ -155,7 +155,7 @@ const AuthorModal = (props) => {
                                 {usersList.length > 0 ? (
                                     usersList.map(
                                       ({ _id, email, firstName }) => (
-                                      <option value="_id">{firstName}: {email}</option>
+                                      <option value={email}>{firstName}</option>
                                       )
                                     )
                                   ) : (
@@ -166,11 +166,11 @@ const AuthorModal = (props) => {
                             </div>
                             <div class="col-6">
                               <small class="form-text text-muted mb-1">Or enter author details</small>
-                              <button class="btn btn-block btn-secondary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">Quick Add
+                              <button class="btn btn-block btn-secondary" type="button" data-toggle="collapse" data-target="#nameCollapse" aria-expanded="false" aria-controls="nameCollapse">Quick Add
                             </button>
                             </div>
                           </div>
-                          <div class="collapse w-100 mb-2" id="collapseExample">
+                          <div class="collapse w-100 mb-2" id="nameCollapse">
                             <div class="form-row">
                               <div class="form-group col-md-6">
                                 <label for="FirstName">First Name</label>

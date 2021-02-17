@@ -89,7 +89,14 @@ Router.get('/getAllFiles', async (req, res) => {
         res.status(400).send('Error while getting list of files. Try again later.');
     }
 });
-
+Router.get('/getFile/:id', async (req, res) => {
+    try {
+        const file = await File.findById(req.params.id);
+        res.send(file);
+    } catch (error) {
+        res.status(400).send('Error while getting file. Try again later.');
+    }
+});
 Router.get('/download/:id', async (req, res) => {
     try {
         const file = await File.findById(req.params.id);

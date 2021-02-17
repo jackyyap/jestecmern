@@ -2,6 +2,7 @@ import ReviewerManuscriptList from './ReviewerManuscriptList';
 import ReviewerJobTracker from './ReviewerJobTracker';
 import Filter from './Filter';
 import DashboardHeader from '../layouts/DashboardHeader';
+import ReviewerReader from './ReviewerReader';
 
 function Reviewer (){
 	return(
@@ -15,7 +16,7 @@ function Reviewer (){
               <Filter />
             </div>
             <div class="container col-sm-5 col-md-7">
-            	<ReviewerManuscriptList />
+            	<ReviewerReader />
             </div>
             <div class="col-sm-3 col-md-2">
               <ReviewerJobTracker />

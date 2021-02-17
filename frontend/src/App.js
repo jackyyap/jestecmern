@@ -5,6 +5,7 @@ import Header from './components/layouts/Header';
 import Home from './components/pages/Home';
 import Dashboard from './components/pages/Dashboard';
 import Archive from './components/pages/Archive';
+import SubmissionGuidelines from './components/pages/SubmissionGuidelines';
 import ArticleReader from './components/pages/ArticleReader';
 import Login from './components/auth/Login';
 import Register from './components/auth/Register';
@@ -66,7 +67,7 @@ export default function App() {
                     <Route path="/archive" component={Archive} />
                     <Route path="/articlereader" component={ArticleReader} />
                     <Route path="/fileslist" component={FilesList} />
-
+                    <Route path="/submissionguidelines" component={SubmissionGuidelines} />
                 </Switch>
             </UserContext.Provider>
         </BrowserRouter>
