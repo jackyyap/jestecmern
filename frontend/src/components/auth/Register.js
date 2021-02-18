@@ -82,6 +82,7 @@ export default function Register() {
                     class="form-control"
                     placeholder="Password"
                   />
+                  <small class="text-muted">Password length minimum 8 characters</small>
                 </div>
                 <div class="col-sm-6 form-label-group">
                   <label for="register-password">Confirm Password</label>
@@ -97,7 +98,7 @@ export default function Register() {
               <div class="form-row">
                 <div class="col-sm-2 form-label-group">
                   <label for="register-title">Title</label>
-                  <select 
+                  <select
                     type="text"
                     id="register-title"
                     onChange={(e) => setTitle(e.target.value)}
@@ -132,31 +133,31 @@ export default function Register() {
                 </div>
               </div>
 
-            <div class="form-row">
-              <div class="col-sm-6 form-label-group mb-3">
-                <label for="register-affiliation">Affiliation</label>
-                <input
-                  type="text"
-                  id="register-affiliation"
-                  onChange={(e) => setAffiliation(e.target.value)}
-                  class="form-control"
-                  placeholder="Affiliation"
+              <div class="form-row">
+                <div class="col-sm-6 form-label-group mb-3">
+                  <label for="register-affiliation">Affiliation</label>
+                  <input
+                    type="text"
+                    id="register-affiliation"
+                    onChange={(e) => setAffiliation(e.target.value)}
+                    class="form-control"
+                    placeholder="Affiliation"
 
-                  autofocus />
+                    autofocus />
+                </div>
+                <div class="col-sm-6">
+                  <label for="register-orcid">ORCID ID</label>
+                  <input
+                    type="text"
+                    id="register-orcid"
+                    onChange={(e) => setOrcidId(e.target.value)}
+                    class="form-control"
+                    placeholder="https://orcid.org/0000-0000-0000-0000"
+
+                    autofocus />
+                  <small class="text-muted">Please provide full ORCID ID link</small>
+                </div>
               </div>
-              <div class="col-sm-6">
-                <label for="register-orcid">ORCID ID</label>
-                <input
-                  type="text"
-                  id="register-orcid"
-                  onChange={(e) => setOrcidId(e.target.value)}
-                  class="form-control"
-                  placeholder="https://orcid.org/0000-0000-0000-0000"
-                  
-                  autofocus />
-                <small class="text-muted">Please provide full ORCID ID link</small>
-              </div>
-            </div>
 
               <div class="custom-control custom-checkbox mb-3">
                 <input type="checkbox" class="custom-control-input" id="customCheck1" />

@@ -80,6 +80,7 @@ export default function Home() {
             <p><strong>Copyright transfer</strong>: All the authors should sign the copyright transfer form and submit with the pre-view manuscript.</p>
             <p><strong>Review Policy</strong>: All contributions shall be subjected to double blind peer review by at least two experts in the field. The board of editors reserves the right to accept or reject any contribution. The decision about the acceptance of a contribution for publication is final. The board of editor shall do its best to ensure a quick refereeing process.</p>  
           </div>
+          <h5 className="lead text-center" >In order to submit a manuscript, you need to be registered with a JESTEC account</h5>
         </div>
       </div>
     </div>
